@@ -63,13 +63,27 @@ const switchTheme = function (e) {
   if (e.target.checked) {
     document.documentElement.setAttribute('data-theme', 'dark');
     // darkMode();
+    localStorage.setItem('theme', 'dark');
     changeMode('dark');
   } else {
     document.documentElement.setAttribute('data-theme', 'light');
     // lightMode();
+    localStorage.setItem('theme', 'light');
+
     changeMode('light');
   }
 };
 
 // addEventListener
 toggleSwitch.addEventListener('change', switchTheme);
+
+// check local Storage
+const currentTheme = localStorage.getItem('theme');
+if (currentTheme) {
+  document.documentElement.setAttribute('data-theme', currentTheme);
+
+  if (currentTheme === 'dark') {
+    toggleSwitch.checked = true;
+    changeMode('dark');
+  }
+}
